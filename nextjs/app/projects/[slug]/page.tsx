@@ -32,3 +32,5 @@ export default async function ProjectDetail({ params }: PageProps) {
   // Truyền dữ liệu sang Client Component để hiển thị giao diện và chạy hiệu ứng
   return <ProjectClientContent project={project} />;
 }
+
+export const dynamicParams = true;

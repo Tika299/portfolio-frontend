@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
   images: {
     // Cho phép Next.js xử lý ảnh từ Laravel
     unoptimized: true,
