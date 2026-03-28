@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import { getProjectBySlug, getProjects } from "@/lib/api";
 import { notFound } from "next/navigation";
