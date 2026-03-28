@@ -14,6 +14,7 @@ import GithubIcon from "@/components/icons/GithubIcon";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
+import ProjectClientContent from "@/components/project-client-content";
 
 import { Project } from "@/types";
 
@@ -24,8 +25,7 @@ interface PageProps {
 
 export async function generateStaticParams() {
   const projects = await getProjects();
-
-  return projects.map((project: { slug: string; }) => ({
+  return projects.map((project: Project) => ({
     slug: project.slug,
   }));
 }
