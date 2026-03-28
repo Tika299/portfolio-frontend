@@ -5,19 +5,7 @@ import Link from "next/link";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
-// Định nghĩa Type rõ ràng (fix lỗi no-explicit-any)
-type Technology = {
-  id: number;
-  name: string;
-};
-
-type Project = {
-  id: number;
-  title: string;
-  slug: string;
-  thumbnail: string;
-  technologies: Technology[];
-};
+import { Project } from "@/types"; // Import kiểu dữ liệu Project từ types/index.ts
 
 export default async function ProjectsPage() {
   const projects: Project[] = await getProjects();

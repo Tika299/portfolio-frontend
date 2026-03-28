@@ -1,15 +1,30 @@
+import { Project, Post, ApiResponse } from "@/types";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export async function getProjects() {
-  const res = await fetch(`${API_URL}/projects`, { next: { revalidate: 3600 } }); // Cache 1 tiếng
-  if (!res.ok) throw new Error('Failed to fetch projects');
-  const data = await res.json();
-  return data.data; // Vì Laravel Resource bọc dữ liệu trong key 'data'
+export async function getProjects(): Promise<Project[]> {
+  const res = await fetch(`${API_URL}/projects`, { cache: 'no-store' });
+  if (!res.ok) return [];
+  const json: ApiResponse<Project[]> = await res.json();
+  return json.data;
 }
 
-export async function getProjectBySlug(slug: string) {
-  const res = await fetch(`${API_URL}/projects/${slug}`, { next: { revalidate: 3600 } });
+export async function getProjectBySlug(slug: string): Promise<Project | null> {
+  const res = await fetch(`${API_URL}/projects/${slug}`, { cache: 'no-store' });
   if (!res.ok) return null;
-  const data = await res.json();
-  return data.data;
+  const json: ApiResponse<Project> = await res.json();
+  return json.data;
+}
+
+export async function getPosts(): Promise<Post[]> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts`, { cache: 'no-store' });
+  if (!res.ok) return [];
+  const json: ApiResponse<Post[]> = await res.json();
+  return json.data;
+}
+
+export async function getPostBySlug(slug: string): Promise<Post | null> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts/${slug}`, { cache: 'no-store' });
+  if (!res.ok) return null;
+  const json: ApiResponse<Post> = await res.json();
+  return json.data;
 }

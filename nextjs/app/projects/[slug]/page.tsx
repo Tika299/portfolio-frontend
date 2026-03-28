@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getProjectBySlug } from "@/lib/api";
+import { getProjectBySlug, getProjects } from "@/lib/api";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,28 +15,19 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 
-// 1. Định nghĩa Interface để xóa lỗi "any"
-interface Technology {
-  id: number;
-  name: string;
-  icon: string; // Giả sử bạn có trường icon trong cơ sở dữ liệu để lưu tên công nghệ hoặc biểu tượng
-}
-
-interface Project {
-  id: number;
-  title: string;
-  slug: string;
-  content: string;
-  thumbnail: string;
-  demo_url?: string;
-  github_url?: string;
-  created_at: string;
-  technologies: Technology[];
-}
+import { Project } from "@/types";
 
 // 2. Định nghĩa kiểu cho Props của Page
 interface PageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateStaticParams() {
+  const projects = await getProjects();
+
+  return projects.map((project) => ({
+    slug: project.slug,
+  }));
 }
 
 export default function ProjectDetail({ params }: PageProps) {
@@ -119,7 +110,7 @@ export default function ProjectDetail({ params }: PageProps) {
           </h2>
 
           {/* KHU VỰC RENDER MARKDOWN */}
-          <div className="markdown-body !bg-transparent !text-inherit">
+          <div className="markdown-body !bg-transparent !text-inherit !w-full">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeHighlight]}
@@ -134,8 +125,20 @@ export default function ProjectDetail({ params }: PageProps) {
             <h3 className="font-bold text-lg mb-4">Công nghệ</h3>
             <div className="flex flex-wrap gap-2">
               {project.technologies?.map((tech) => (
-                <Badge key={tech.id} variant="secondary" className="px-4 py-4 text-xs font-medium hover:bg-primary hover:text-primary-foreground transition-colors cursor-default">
-                  <Image src={tech.icon} alt={tech.name} width={24} height={24} />
+                <Badge
+                  key={tech.id}
+                  variant="secondary"
+                  className="px-3 py-3 text-xs font-medium hover:bg-primary hover:text-primary-foreground transition-colors cursor-default"
+                >
+                  {tech.icon && (
+                    <Image
+                      src={tech.icon}
+                      alt={tech.name}
+                      width={18}
+                      height={18}
+                    />
+                  )}
+                  <span className="ml-2">{tech.name}</span>
                 </Badge>
               ))}
             </div>

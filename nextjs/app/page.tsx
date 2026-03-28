@@ -5,19 +5,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Navbar from "@/components/navbar";
 
-// Định nghĩa kiểu dữ liệu để tránh lỗi "any"
-type Technology = {
-  id: number;
-  name: string;
-};
-
-type Project = {
-  id: number;
-  title: string;
-  slug: string;
-  thumbnail: string;
-  technologies: Technology[];
-};
+import { Project } from "@/types"; // Đã sửa: Thêm import Project từ types
 
 export default async function Home() {
   const projects: Project[] = await getProjects(); // Lấy dữ liệu từ API thật

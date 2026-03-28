@@ -121,10 +121,54 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+
   html {
     @apply font-sans;
+  }
+  /* --- Tinh chỉnh bảng cho github-markdown-css theo Theme --- */
+
+  /* Giao diện Sáng (Mặc định) */
+  .markdown-body table th,
+  .markdown-body table td {
+    border: 1px solid #d0d7de !important;
+    /* Màu viền xám GitHub Light */
+    color: #1f2328 !important;
+  }
+
+  .markdown-body table tr {
+    background-color: #ffffff !important;
+    border-top: 1px solid #d0d7de !important;
+  }
+
+  .markdown-body table tr:nth-child(2n) {
+    background-color: #f6f8fa !important;
+    /* Màu dòng xen kẽ */
+  }
+
+  /* Giao diện Tối (Khi có class .dark từ ThemeProvider) */
+  .dark .markdown-body table th,
+  .dark .markdown-body table td {
+    border: 1px solid #30363d !important;
+    /* Màu viền xám GitHub Dark */
+    color: #e6edf3 !important;
+  }
+
+  .dark .markdown-body table tr {
+    background-color: #0d1117 !important;
+    /* Nền tối GitHub */
+    border-top: 1px solid #30363d !important;
+  }
+
+  .dark .markdown-body table tr:nth-child(2n) {
+    background-color: #161b22 !important;
+    /* Dòng xen kẽ tối */
+  }
+
+  .dark .markdown-body table th {
+    background-color: #161b22 !important;
   }
 }

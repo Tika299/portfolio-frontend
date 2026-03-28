@@ -1,18 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
   images: {
     // Cho phép Next.js xử lý ảnh từ Laravel
+    unoptimized: true,
     remotePatterns: [
       {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '8000',
-        pathname: '/storage/**',
-      },
-      {
-        protocol: 'http',
-        hostname: '127.0.0.1',
-        port: '8000',
+        protocol: 'https',
+        hostname: 'api-vuxuan.onrender.com', // Thay bằng link thật của bạn trên Render
         pathname: '/storage/**',
       },
     ],
