@@ -7,7 +7,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'api-vuxuan.onrender.com', // Thay bằng link thật của bạn trên Render
+        hostname: 'portfolio-backend-ubup.onrender.com', // Thay bằng link thật của bạn trên Render
         pathname: '/storage/**',
       },
     ],
