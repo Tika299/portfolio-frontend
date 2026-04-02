@@ -13,6 +13,14 @@ import rehypeHighlight from "rehype-highlight";
 import { Project } from "@/types";
 
 export default function ProjectClientContent({ project }: { project: Project }) {
+  const cleanUrl = (url: string) => {
+    if (!url) return "";
+    const githubMarker = "https://raw.githubusercontent.com";
+    if (url.includes(githubMarker)) {
+      return githubMarker + url.split(githubMarker)[1];
+    }
+    return url;
+  };
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -45,10 +53,9 @@ export default function ProjectClientContent({ project }: { project: Project }) 
       {/* Ảnh đại diện */}
       <div className="relative aspect-video w-full overflow-hidden rounded-3xl border border-border/50 shadow-2xl mb-12 group">
         <Image
-          src={project.thumbnail}
+          src={cleanUrl(project.thumbnail)}
           alt={project.title}
           fill
-          unoptimized={true} // Giữ lại để tránh lỗi 400 ở môi trường hiện tại
           className="object-cover transition-transform duration-700 group-hover:scale-105"
           priority
         />

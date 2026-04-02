@@ -1,13 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
   images: {
-    // Cho phép Next.js xử lý ảnh từ Laravel
-    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'portfolio-backend-ubup.onrender.com', // Thay bằng link thật của bạn trên Render
-        pathname: '/storage/**',
+        hostname: 'raw.githubusercontent.com', // Thay bằng link thật của bạn trên Render
+        pathname: '/**',
       },
     ],
     // Thêm dòng này để hỗ trợ các thiết bị/trình duyệt cũ nếu cần

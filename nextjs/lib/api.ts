@@ -4,7 +4,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export async function getProjects() {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects`, {
-      next: { revalidate: 3600 }
+      cache: 'no-store',
     });
     if (!res.ok) return []; // Trả về mảng rỗng thay vì ném lỗi để Vercel build tiếp
     const data = await res.json();

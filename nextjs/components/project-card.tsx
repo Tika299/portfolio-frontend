@@ -10,15 +10,22 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
+  const cleanUrl = (url: string) => {
+    if (!url) return "";
+    const githubMarker = "https://raw.githubusercontent.com";
+    if (url.includes(githubMarker)) {
+      return githubMarker + url.split(githubMarker)[1];
+    }
+    return url;
+  };
   return (
     <Link href={`/projects/${project.slug}`} className="block">
       <Card className="overflow-hidden hover:shadow-lg transition-shadow group h-full">
         <div className="relative h-52 w-full">
           <Image
-            src={project.thumbnail}
+            src={cleanUrl(project.thumbnail)}
             alt={project.title}
             fill
-            unoptimized
             className="object-cover group-hover:scale-105 transition-transform duration-500"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />

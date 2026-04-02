@@ -9,6 +9,15 @@ import { Project } from "@/types"; // Import kiểu dữ liệu Project từ typ
 
 export default async function ProjectsPage() {
   const projects: Project[] = await getProjects();
+  const cleanUrl = (url: string) => {
+    if (!url) return "";
+    const githubMarker = "https://raw.githubusercontent.com";
+    if (url.includes(githubMarker)) {
+      return githubMarker + url.split(githubMarker)[1];
+    }
+    return url;
+  };
+
 
   return (
     <div className="container mx-auto py-10 px-4">
@@ -25,10 +34,9 @@ export default async function ProjectsPage() {
               {/* Thumbnail */}
               <div className="relative h-52 w-full">
                 <Image 
-                  src={project.thumbnail} 
+                  src={cleanUrl(project.thumbnail)} 
                   alt={project.title} 
-                  fill 
-                  unoptimized
+                  fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
