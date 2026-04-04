@@ -29,9 +29,10 @@ export interface Post {
   slug: string;
   summary: string;
   content: string;
-  cover_image?: string;
-  created_at: string;
-  reading_time?: string; // Tính toán thêm nếu muốn
+  cover_image: string;
+  views: number;
+  is_published: boolean;
+  published_at: string;
 }
 
 // 4. Định nghĩa cấu trúc API trả về từ Laravel (Optional nhưng rất chuyên nghiệp)

@@ -19,7 +19,7 @@ export default function AboutPage() {
             <motion.section {...fadeIn} className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-24">
                 <div className="relative aspect-square max-w-sm mx-auto md:mx-0 overflow-hidden rounded-2xl border-4 border-muted shadow-2xl">
                     <Image
-                        src="https://raw.githubusercontent.com/Tika299/portfolio-assets/refs/heads/main/avatar.png" // Hãy thay bằng ảnh chân dung của bạn
+                        src="https://lpctoylpxvdqwjqcxeoy.supabase.co/storage/v1/object/public/portfolio/avatar/avatar.png" // Hãy thay bằng ảnh chân dung của bạn
                         alt="Xuân Vũ"
                         fill
                         className="object-cover"

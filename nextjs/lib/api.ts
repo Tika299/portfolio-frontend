@@ -3,7 +3,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function getProjects() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects`, {
+    const res = await fetch(`${API_URL}/projects`, {
       cache: 'no-store',
     });
     if (!res.ok) return []; // Trả về mảng rỗng thay vì ném lỗi để Vercel build tiếp
@@ -21,15 +21,22 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
   return json.data;
 }
 
-export async function getPosts(): Promise<Post[]> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts`, { cache: 'no-store' });
-  if (!res.ok) return [];
-  const json: ApiResponse<Post[]> = await res.json();
-  return json.data;
+export async function getPosts() {
+  try {
+    const res = await fetch(`${API_URL}/posts`, {
+      cache: 'no-store',
+      headers: { 'Accept': 'application/json' }
+    });
+    if (!res.ok) return []; // Nếu API lỗi, trả về mảng rỗng thay vì làm sập trang
+    const json = await res.json();
+    return json.data || [];
+  } catch (error) {
+    return [];
+  }
 }
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts/${slug}`, { cache: 'no-store' });
+  const res = await fetch(`${API_URL}/posts/${slug}`, { cache: 'no-store' });
   if (!res.ok) return null;
   const json: ApiResponse<Post> = await res.json();
   return json.data;

@@ -5,8 +5,8 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'raw.githubusercontent.com', // Thay bằng link thật của bạn trên Render
-        pathname: '/**',
+        hostname: '*.supabase.co', // Cho phép tất cả domain Supabase
+        pathname: '/storage/v1/object/public/**',
       },
     ],
     // Thêm dòng này để hỗ trợ các thiết bị/trình duyệt cũ nếu cần
